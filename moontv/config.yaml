@@ -1,4 +1,4 @@
-name: MoonTV
+﻿name: MoonTV
 slug: moontv
 description: MoonTV - 一个开箱即用的、跨平台的影视聚合播放器
 version: 2025.7.11
@@ -21,4 +21,4 @@ schema:
   resource: url?
 options:
   password: ''
-  resource: https://ghproxy.link/cfrp.hacs.vip/raw/senshinya/MoonTV/refs/heads/main/config.json
+  resource: https://cfrp.hacs.vip/raw/senshinya/MoonTV/refs/heads/main/config.json
