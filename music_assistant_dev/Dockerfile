@@ -19,7 +19,7 @@ RUN set -x \
     uv pip install \
     --no-cache \
     --link-mode=copy \
-    -r "https://ghproxy.link/raw.githubusercontent.com/music-assistant/server/refs/heads/dev/requirements_all.txt"
+    -r "https://raw.githubusercontent.com/music-assistant/server/refs/heads/dev/requirements_all.txt"
 
 VOLUME [ "/data" ]
 EXPOSE 8095
