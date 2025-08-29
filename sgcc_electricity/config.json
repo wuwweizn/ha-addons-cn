@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "SGCC Electricity",
   "version": "1.0.0",
   "slug": "sgcc_electricity",
@@ -13,5 +13,6 @@
   "webui": "http://[HOST]:[PORT:8080]",
   "arch": ["amd64", "aarch64"],
   "options": {},
-  "schema": {}
+  "schema": {},
+  "image": "ghcr.nju.edu.cn/wuwweizn/sgcc_electricity-{arch}"
 }
