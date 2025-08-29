@@ -22,4 +22,4 @@ options:
   password: ""
   resource: "https://cfrp.hacs.vip/raw/senshinya/MoonTV/refs/heads/main/config.json"
 
-image: "ghcr.nju.edu.cn/wuwweizn/wwzn-china/moontv:latest"
+image: "ghcr.nju.edu.cn/wuwweizn/moontv-{arch}"
