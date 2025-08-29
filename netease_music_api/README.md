@@ -7,7 +7,7 @@
 - 可用于音乐播放、歌单搜索等操作
 
 ## 使用方法
-1. 将 `netease_music_api` 文件夹复制到 `/addons_local/` 目录
+1. 添加仓库：https://gitee.com/wuwzn/ha-addons-cn
 2. 在 Home Assistant 加载项页面刷新本地加载项
 3. 安装并启动，访问 http://HA-IP:3000 进行测试
 
