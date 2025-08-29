@@ -14,5 +14,5 @@
   "arch": ["amd64", "aarch64"],
   "options": {},
   "schema": {},
-  "image": "ghcr.nju.edu.cn/wuwweizn/sgcc_electricity-{arch}"
+  "image": "ghcr.nju.edu.cn/wuwweizn/sgcc_electricity:1.0.0"
 }
