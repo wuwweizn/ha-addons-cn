@@ -1,25 +1,25 @@
-﻿name: MoonTV
-slug: moontv
-description: MoonTV - 一个开箱即用的、跨平台的影视聚合播放器
-version: 2025.7.11
-url: https://github.com/senshinya/MoonTV
-webui: http://[HOST]:[PORT:28866]
-panel_icon: mdi:television
+﻿name: "MoonTV"
+slug: "moontv"
+description: "MoonTV - 一个开箱即用的、跨平台的影视聚合播放器"
+version: "2025.7.11"
+url: "https://github.com/senshinya/MoonTV"
+webui: "http://[HOST]:[PORT:28866]"
+panel_icon: "mdi:television"
 ingress: true
 init: false
 arch:
-  - aarch64
-  - amd64
-  # armv7
+  - "amd64"
+  - "aarch64"
 ports:
   80/tcp: 28866
 map:
-  - share
-  - media
+  - "share"
+  - "media"
 schema:
-  password: password?
-  resource: url?
+  password: "password?"
+  resource: "url?"
 options:
-  password: ''
-  resource: https://cfrp.hacs.vip/raw/senshinya/MoonTV/refs/heads/main/config.json
-image: "ghcr.nju.edu.cn/wuwweizn/wwzn-china/moontv:2025.7.11"
+  password: ""
+  resource: "https://cfrp.hacs.vip/raw/senshinya/MoonTV/refs/heads/main/config.json"
+
+image: "ghcr.nju.edu.cn/wuwweizn/wwzn-china/moontv:latest"
