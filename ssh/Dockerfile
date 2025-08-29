@@ -77,7 +77,7 @@ RUN sed -i 's/^#[[:space:]]*\(include "\/usr\/share\/nano\/\*\.nanorc".*\)/\1/' 
 ARG BUILD_ARCH
 ARG CLI_VERSION
 RUN curl -Lso /usr/bin/ha \
-        "https://github.com/home-assistant/cli/releases/download/${CLI_VERSION}/ha_${BUILD_ARCH}" \
+        "https://ghproxy.link/github.com/home-assistant/cli/releases/download/${CLI_VERSION}/ha_${BUILD_ARCH}" \
     && chmod a+x /usr/bin/ha \
     && /usr/bin/ha completion > /usr/share/bash-completion/completions/ha
 

@@ -2,7 +2,7 @@ name: Node-RED
 version: 20.0.0
 slug: nodered
 description:  物联网的基于流程的编程Flow-based programming for the Internet of Things
-url: https://github.com/hassio-addons/addon-node-red
+url: https://ghproxy.link/github.com/hassio-addons/addon-node-red
 codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 0

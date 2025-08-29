@@ -14,8 +14,8 @@ labels:
   maintainer: "wuwweizn"
   org.opencontainers.image.title: "Lucky Home Assistant Add-on"
   org.opencontainers.image.description: "Lucky网络工具Home Assistant加载项"
-  org.opencontainers.image.source: "https://github.com/wuwweizn/wwzn-china"
-  org.opencontainers.image.documentation: "https://github.com/wuwweizn/wwzn-china/tree/main/lucky"
+  org.opencontainers.image.source: "https://ghproxy.link/github.com/wuwweizn/wwzn-china"
+  org.opencontainers.image.documentation: "https://ghproxy.link/github.com/wuwweizn/wwzn-china/tree/main/lucky"
   org.opencontainers.image.author: "wuwweizn"
   org.opencontainers.image.licenses: "Apache-2.0"
 
