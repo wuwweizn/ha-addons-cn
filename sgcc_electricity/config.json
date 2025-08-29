@@ -14,5 +14,5 @@
   "arch": ["amd64", "aarch64"],
   "options": {},
   "schema": {},
-  "image": "ghcr.io/wuwweizn/sgcc_electricity-amd64:1.0.0"
+  "image": "ghcr.io/wuwweizn/sgcc_electricity:1.0.0"
 }
