@@ -12,7 +12,7 @@ arch:
 startup: services
 ingress: true
 ingress_port: 9118
-image: "ghcr.io/wuwweizn/jdxb-{arch}"
+image: "ghcr.nju.edu.cn/wuwweizn/jdxb-{arch}"
 init: false
 hassio_role: manager
 panel_icon: mdi:server-network
