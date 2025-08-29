@@ -19,3 +19,16 @@
 
 源码地址：https://github.com/ARC-MX/sgcc_electricity_new
 
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/wuwzn/ha-addons/raw/master/0wwzn/logo.jpg" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/wuwzn/ha-addons/raw/master/0wwzn/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/wuwzn/ha-addons/raw/master/0wwzn/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+感谢您的支持与鼓励！
