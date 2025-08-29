@@ -4,7 +4,7 @@ set -e
 build_arch=${1:-amd64}
 frp_version=${2:-0.52.0}
 
-frp_url="https://github.com/fatedier/frp/releases/download/"
+frp_url="https://ghproxy.link/github.com/fatedier/frp/releases/download/"
 app_path="/usr/src"
 
 function select_machine() {
