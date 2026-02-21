@@ -7,7 +7,7 @@ arch:
   - amd64
   - aarch64
   - armv7
-image: ghcr.io/wuwweizn/xiaomusic-{arch}
+image: ghcr.nju.edu.cn/wuwweizn/xiaomusic-{arch}
 ports:
   8090/tcp: 58090
 ports_description:
