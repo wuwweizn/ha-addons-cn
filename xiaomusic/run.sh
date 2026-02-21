@@ -1,102 +1,37 @@
-#!/usr/bin/env bash
-# ==============================================================================
-# XiaoMusic Add-on 启动脚本
-# 注意：使用 bash 而非 with-contenv bashio，因为 xiaomusic 镜像没有 s6-overlay
-#
-# HA 加载项运行时挂载点：
-#   /config  -> HA 配置目录  (config:rw)
-#   /media   -> HA 媒体库    (media:rw)
-#   /share   -> HA Share目录 (share:rw)
-# ==============================================================================
-
+#!/bin/bash
 set -e
 
-# bashio 读取配置的辅助函数（替代 with-contenv bashio）
-# HA 把加载项选项写入 /data/options.json
-config_get() {
-    local key="$1"
-    local default="$2"
-    local val
-    val=$(jq -r --arg k "$key" '.[$k] // empty' /data/options.json 2>/dev/null)
-    if [ -z "$val" ] || [ "$val" = "null" ]; then
-        echo "$default"
-    else
-        echo "$val"
-    fi
-}
+# ─── HA Add-on 通过环境变量注入 options 配置（变量名大写）──────────────────────
+PUBLIC_PORT="${PUBLIC_PORT:-58090}"
 
-echo "[XiaoMusic] ===== 启动中 ====="
+# ─── 官方镜像固定使用 /app/music 和 /app/conf ─────────────────────────────────
+# HA 的 map: share:rw 会将宿主 /share 挂载到容器 /share
+# 用软链接把官方路径指向 HA 的共享存储，避免修改官方启动逻辑
+mkdir -p /share/xiaomusic/music /share/xiaomusic/conf
 
-# ------------------------------------------------------------------------------
-# 读取用户配置（来自 /data/options.json）
-# ------------------------------------------------------------------------------
-PUBLIC_PORT=$(config_get "public_port" "58090")
-SONG_MEDIA=$(config_get "song_media" "")
-SONG_SHARE=$(config_get "song_share" "")
-SONG_DOWNLOAD=$(config_get "song_download" "")
-
-export XIAOMUSIC_PUBLIC_PORT="${PUBLIC_PORT}"
-echo "[XiaoMusic] 公网端口: ${PUBLIC_PORT}"
-
-# ------------------------------------------------------------------------------
-# 持久化配置目录：/app/conf -> /config/xiaomusic
-# ------------------------------------------------------------------------------
-mkdir -p /config/xiaomusic
-
-if [ -d /app/conf ] && [ ! -L /app/conf ]; then
-    cp -r /app/conf/. /config/xiaomusic/ 2>/dev/null || true
-    rm -rf /app/conf
+# 如果 /app/music 还不是软链接，就替换掉
+if [ ! -L /app/music ]; then
+    rm -rf /app/music
+    ln -s /share/xiaomusic/music /app/music
 fi
 
+# /app/conf 软链接
 if [ ! -L /app/conf ]; then
-    ln -sf /config/xiaomusic /app/conf
-fi
-echo "[XiaoMusic] 配置目录: /app/conf -> /config/xiaomusic"
-
-# ------------------------------------------------------------------------------
-# 音乐目录软链接
-# ------------------------------------------------------------------------------
-mkdir -p /app/music
-
-# song_media -> /app/music/media_link
-MEDIA_LINK="/app/music/media_link"
-rm -f "${MEDIA_LINK}"
-if [ -n "${SONG_MEDIA}" ]; then
-    MEDIA_SRC="/media/${SONG_MEDIA}"
-    mkdir -p "${MEDIA_SRC}"
-    ln -sf "${MEDIA_SRC}" "${MEDIA_LINK}"
-    echo "[XiaoMusic] 音乐目录(media): ${MEDIA_LINK} -> ${MEDIA_SRC}"
-else
-    ln -sf /media "${MEDIA_LINK}"
-    echo "[XiaoMusic] 音乐目录(media): ${MEDIA_LINK} -> /media (全部)"
+    rm -rf /app/conf
+    ln -s /share/xiaomusic/conf /app/conf
 fi
 
-# song_share -> /app/music/share_link
-SHARE_LINK="/app/music/share_link"
-rm -f "${SHARE_LINK}"
-if [ -n "${SONG_SHARE}" ]; then
-    SHARE_SRC="/share/${SONG_SHARE}"
-    mkdir -p "${SHARE_SRC}"
-    ln -sf "${SHARE_SRC}" "${SHARE_LINK}"
-    echo "[XiaoMusic] 音乐目录(share): ${SHARE_LINK} -> ${SHARE_SRC}"
-fi
+echo "===================================="
+echo "  XiaoMusic Add-on 正在启动..."
+echo "  Web 管理界面端口: ${PUBLIC_PORT}"
+echo "  音乐目录 -> /share/xiaomusic/music"
+echo "  配置目录 -> /share/xiaomusic/conf"
+echo "===================================="
+echo "  访问地址: http://homeassistant.local:${PUBLIC_PORT}"
+echo "  初次使用需在 Web 页面填写小米账号密码。"
+echo "===================================="
 
-# song_download -> /app/music/download
-DOWNLOAD_LINK="/app/music/download"
-rm -f "${DOWNLOAD_LINK}"
-if [ -n "${SONG_DOWNLOAD}" ]; then
-    DOWNLOAD_SRC="/share/${SONG_DOWNLOAD}"
-    mkdir -p "${DOWNLOAD_SRC}"
-    ln -sf "${DOWNLOAD_SRC}" "${DOWNLOAD_LINK}"
-    echo "[XiaoMusic] 下载目录: ${DOWNLOAD_LINK} -> ${DOWNLOAD_SRC}"
-else
-    mkdir -p /app/music/download
-    echo "[XiaoMusic] 下载目录: /app/music/download (容器内)"
-fi
+# ─── 用官方镜像原生的 supervisord 启动（保持和官方完全一致的启动方式）──────────
+export XIAOMUSIC_PUBLIC_PORT="${PUBLIC_PORT}"
 
-# ------------------------------------------------------------------------------
-# 启动 xiaomusic
-# ------------------------------------------------------------------------------
-echo "[XiaoMusic] 启动服务，Web 界面端口: 8090"
-
-exec /app/entrypoint.sh
+exec /usr/bin/supervisord -c /app/supervisord.conf
