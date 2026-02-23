@@ -1,37 +1,42 @@
-# Configuration
+# 配置（Configuration）
 
 ![image](https://raw.githubusercontent.com/adamoutler/HassOSArgonOneAddon/main/gitResources/Configuration.png)
 
-## Celsius or Fahrenheit
+## 摄氏或华氏
 
-Choose Celsius or Fahrenheit.
+选择使用摄氏度（Celsius）或华氏度（Fahrenheit）。
 
-- **CorF** - Configures Celsius or Fahrenheit.
+CorF – 设置使用摄氏或华氏温度单位。
 
-## Temperature Ranges
+## 温度范围（Temperature Ranges）
 
 ![image](https://raw.githubusercontent.com/adamoutler/HassOSArgonOneAddon/main/gitResources/FanRangeExplaination.png)
 
-Set your fan ranges appropriately.
+请合理设置风扇的温度区间。
 
-- **LowRange** Minimum Temperature to turn on 33%. Anything lower will turn off.
-- **MediumRange** to be the temperature divider between 33 and 66%.
-- **HighRange** to be the maximum temperature before 100% fan.
+- **LowRange** 最低温度阈值。
+当温度达到这个值时，风扇会以 33% 转速运行。
+低于这个温度时，风扇会关闭。
+- **MediumRange** 作为 33% 和 66% 转速之间的分界温度
+- **HighRange** 达到此温度时，风扇将以 100% 全速运行。
+这是最高温度阈值。
 
-## Enable I2C
+## 启用 I2C
 
-In order to enable i2C, you must follow one of the methods below.
+要启用 I2C，必须使用以下方法之一：
 
-### The easy way
-
+### 简单方法
+安装 HassOS I2C Configurator 插件。
 [Addon](https://community.home-assistant.io/t/add-on-hassos-i2c-configurator/264167)
 
-### The official way
-
+### 官方方法
+按照 Home Assistant 官方 Raspberry Pi 安装指南中的 I2C 启用步骤操作。
 [Official Guide](https://www.home-assistant.io/installation/raspberrypi/#enable-i2c)
 
-## Support
+## 支持
 
-Need support? Click [here](https://community.home-assistant.io/t/argon-one-active-cooling-addon/262598/8).
-Try to be detailed about your feedback.
-If you can't be detailed, then please be as obnoxious as you can be.
+需要帮助？请前往社区链接。 [here](https://community.home-assistant.io/t/argon-one-active-cooling-addon/262598/8).
+
+请尽量详细描述问题。
+
+如果无法详细描述……那就尽量夸张一点表达
